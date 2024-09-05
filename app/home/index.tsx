@@ -1,4 +1,10 @@
-import { View, Text, ActivityIndicator, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useMovies } from '@/presentation/hooks/useMovies';
@@ -19,33 +25,40 @@ const HomeScreen = () => {
   }
 
   return (
-    <View className="mt-2" style={{ paddingTop: safeArea.top }}>
-      <Text className="text-3xl font-bold px-4 mb-2">MoviesApp</Text>
+    <ScrollView>
+      <View className="mt-2 pb-10" style={{ paddingTop: safeArea.top }}>
+        <Text className="text-3xl font-bold px-4 mb-2">MoviesApp</Text>
 
-      {/* Carousel de imágenes */}
-      <MainSlideshow movies={nowPlayingQuery.data ?? []} />
+        {/* Carousel de imágenes */}
+        <MainSlideshow movies={nowPlayingQuery.data ?? []} />
 
-      {/*  Popular */}
-      <MovieHorizontalList
-        title="Populares"
-        movies={popularQuery.data ?? []}
-        className="mb-5"
-      />
+        {/*  Popular */}
+        <MovieHorizontalList
+          title="Populares"
+          movies={popularQuery.data ?? []}
+          className="mb-5"
+        />
 
-      {/*  Top Rated */}
-      <MovieHorizontalList
-        title="Mejor Calificadas"
-        movies={topRatedQuery.data ?? []}
-        className="mb-5"
-      />
+        {/*  Top Rated */}
+        <MovieHorizontalList
+          title="Mejor Calificadas"
+          movies={topRatedQuery.data ?? []}
+          className="mb-5"
+        />
 
-      {/*  Próximamente */}
-      <MovieHorizontalList
-        title="Próximamente"
-        movies={upcomingQuery.data ?? []}
-        className="mb-5"
-      />
-    </View>
+        {/*  Próximamente */}
+        <MovieHorizontalList
+          title="Próximamente"
+          movies={upcomingQuery.data ?? []}
+          className="mb-5"
+        />
+
+        <MovieHorizontalList
+          movies={upcomingQuery.data ?? []}
+          className="mb-5"
+        />
+      </View>
+    </ScrollView>
   );
 };
 export default HomeScreen;
