@@ -7,7 +7,8 @@ import MovieHorizontalList from '@/presentation/components/movies/MovieHorizonta
 
 const HomeScreen = () => {
   const safeArea = useSafeAreaInsets();
-  const { nowPlayingQuery, popularQuery } = useMovies();
+  const { nowPlayingQuery, popularQuery, upcomingQuery, topRatedQuery } =
+    useMovies();
 
   if (nowPlayingQuery.isLoading) {
     return (
@@ -25,7 +26,25 @@ const HomeScreen = () => {
       <MainSlideshow movies={nowPlayingQuery.data ?? []} />
 
       {/*  Popular */}
-      <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []} />
+      <MovieHorizontalList
+        title="Populares"
+        movies={popularQuery.data ?? []}
+        className="mb-5"
+      />
+
+      {/*  Top Rated */}
+      <MovieHorizontalList
+        title="Mejor Calificadas"
+        movies={topRatedQuery.data ?? []}
+        className="mb-5"
+      />
+
+      {/*  Próximamente */}
+      <MovieHorizontalList
+        title="Próximamente"
+        movies={upcomingQuery.data ?? []}
+        className="mb-5"
+      />
     </View>
   );
 };
